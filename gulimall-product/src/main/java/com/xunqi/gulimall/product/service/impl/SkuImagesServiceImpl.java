@@ -3,8 +3,8 @@ package com.xunqi.gulimall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.Query;
+import com.common.utils.PageUtils;
+import com.common.utils.Query;
 import com.xunqi.gulimall.product.dao.SkuImagesDao;
 import com.xunqi.gulimall.product.entity.SkuImagesEntity;
 import com.xunqi.gulimall.product.service.SkuImagesService;
@@ -34,5 +34,12 @@ public class SkuImagesServiceImpl extends ServiceImpl<SkuImagesDao, SkuImagesEnt
 
         return imagesEntities;
     }
+
+    @Override
+    public String getByDefalutSkuId(Long skuId) {
+        SkuImagesEntity skuImages = this.baseMapper.selectDefaultSkuId(skuId);
+        return skuImages == null ? null : skuImages.getImgUrl();
+    }
+
 
 }

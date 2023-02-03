@@ -1,7 +1,7 @@
 package com.xunqi.gulimall.product.feign;
 
-import com.xunqi.common.es.SkuEsModel;
-import com.xunqi.common.utils.R;
+import com.common.es.SkuEsModel;
+import com.common.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

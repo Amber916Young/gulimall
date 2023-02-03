@@ -4,14 +4,14 @@ import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xunqi.common.constant.ProductConstant;
-import com.xunqi.common.es.SkuEsModel;
-import com.xunqi.common.to.SkuHasStockVo;
-import com.xunqi.common.to.SkuReductionTo;
-import com.xunqi.common.to.SpuBoundTo;
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.Query;
-import com.xunqi.common.utils.R;
+import com.common.constant.ProductConstant;
+import com.common.es.SkuEsModel;
+import com.common.to.SkuHasStockVo;
+import com.common.to.SkuReductionTo;
+import com.common.to.SpuBoundTo;
+import com.common.utils.PageUtils;
+import com.common.utils.Query;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.dao.SpuInfoDao;
 import com.xunqi.gulimall.product.entity.*;
 import com.xunqi.gulimall.product.feign.CouponFeignService;
@@ -27,10 +27,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 
@@ -91,13 +89,6 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         spuInfoEntity.setCreateTime(new Date());
         spuInfoEntity.setUpdateTime(new Date());
         this.baseMapper.insert(spuInfoEntity);
-
-        //2、保存Spu的描述图片 pms_spu_info_desc
-        SpuInfoDescEntity descEntity = new SpuInfoDescEntity();
-        descEntity.setSpuId(spuInfoEntity.getId());
-        List<String> decript = spuSaveVo.getDecript();
-        descEntity.setDecript(String.join(",",decript));
-        spuInfoDescService.saveSpuInfoDesc(descEntity);
 
         //3、保存spu的图片集 pms_spu_images
         List<String> images = spuSaveVo.getImages();
@@ -195,12 +186,6 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
         this.saveBaseSpuInfo(spuInfoEntity);
 
-        //2、保存spu的描述图片：pms_spu_info_desc
-        List<String> decript = vo.getDecript();
-        SpuInfoDescEntity spuInfoDescEntity = new SpuInfoDescEntity();
-        spuInfoDescEntity.setSpuId(spuInfoEntity.getId());
-        spuInfoDescEntity.setDecript(String.join(",",decript));
-        spuInfoDescService.saveSpuInfoDesc(spuInfoDescEntity);
 
         //3、保存spu的图片集：pms_spu_images
         List<String> images = vo.getImages();
@@ -333,9 +318,60 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         }
 
         IPage<SpuInfoEntity> page = this.page(new Query<SpuInfoEntity>().getPage(params), queryWrapper);
+        List<SpuInfoEntity> spuInfoEntityList = page.getRecords();
 
+        for(SpuInfoEntity spuInfoEntity : spuInfoEntityList ) {
+            BrandEntity brandEntity = brandService.getById(spuInfoEntity.getBrandId());
+            spuInfoEntity.setBrandName(brandEntity.getName());
+            CategoryEntity categoryEntity = categoryService.getById(spuInfoEntity.getCatalogId());
+            spuInfoEntity.setCateName(categoryEntity.getName());
+            List<SkuInfoEntity> skuInfoEntityList = skuInfoService.getSkusBySpuId(spuInfoEntity.getId());
+            for (SkuInfoEntity skuInfo : skuInfoEntityList) {
+                if (spuInfoEntity.getDefaultImage() == null) {
+                    String url = skuImagesService.getByDefalutSkuId(skuInfo.getSkuId());
+                    if (url != null && !url.isEmpty()) {
+                        spuInfoEntity.setDefaultImage(url);
+                        break;
+                    }
+                }
+            }
+        }
         return new PageUtils(page);
     }
+
+
+    @Override
+    public PageUtils queryPageByCondtionVO(Map<String, Object> params) throws ExecutionException, InterruptedException {
+        PageUtils page = queryPageByCondtion(params);
+        List<SpuInfoEntity> list = (List<SpuInfoEntity>) page.getList();
+        List<SpuVo> spuVoList = new ArrayList<>();
+        for(SpuInfoEntity spuInfoEntity : list){
+            SpuVo tmp = new SpuVo();
+            BeanUtils.copyProperties(spuInfoEntity,tmp);
+            Long spu_id = spuInfoEntity.getId();
+            List<SkuInfoEntity> skuInfoEntityList = skuInfoService.getSkusBySpuId(spu_id);
+            List<SkuItemVoWeb> skuItemVoList = new ArrayList<>();
+            for(SkuInfoEntity entity : skuInfoEntityList){
+                SkuItemVo vos = skuInfoService.item(entity.getSkuId());
+                SkuInfoEntity skuInfo = vos.getInfo();
+                SkusVoWeb skusVoWeb = new SkusVoWeb();
+                BeanUtils.copyProperties(skuInfo,skusVoWeb);
+                SkuItemVoWeb skuItemVoWeb = new SkuItemVoWeb(skusVoWeb,skuInfo.getSkuId(),true,vos.getImages());
+                skuItemVoList.add(skuItemVoWeb);
+                if(tmp.getGroupAttrs() == null){
+                    tmp.setGroupAttrs(vos.getGroupAttrs());
+                }
+                if(tmp.getAttrs() == null){
+                    tmp.setAttrs( vos.getSaleAttr());
+                }
+            }
+            tmp.setSkuItemVoList(skuItemVoList);
+            spuVoList.add(tmp);
+        }
+        page.setList(spuVoList);
+        return page;
+    }
+
 
     @GlobalTransactional(rollbackFor = Exception.class)
     // @Transactional(rollbackFor = Exception.class)

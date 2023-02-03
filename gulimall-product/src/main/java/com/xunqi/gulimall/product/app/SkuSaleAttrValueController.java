@@ -1,7 +1,7 @@
 package com.xunqi.gulimall.product.app;
 
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.entity.SkuSaleAttrValueEntity;
 import com.xunqi.gulimall.product.service.SkuSaleAttrValueService;
 import org.springframework.beans.factory.annotation.Autowired;

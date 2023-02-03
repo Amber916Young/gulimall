@@ -1,8 +1,8 @@
 package com.xunqi.gulimall.product.app;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.entity.BrandEntity;
 import com.xunqi.gulimall.product.entity.CategoryBrandRelationEntity;
 import com.xunqi.gulimall.product.service.CategoryBrandRelationService;

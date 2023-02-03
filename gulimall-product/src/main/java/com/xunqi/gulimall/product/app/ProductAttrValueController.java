@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xunqi.gulimall.product.entity.ProductAttrValueEntity;
 import com.xunqi.gulimall.product.service.ProductAttrValueService;
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
 
 
 

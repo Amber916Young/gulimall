@@ -12,17 +12,15 @@ import java.util.List;
  */
 
 @Data
-public class Skus {
+public class Skus  extends  SkusVoWeb{
 
   private List<Attr> attr;
-  private String skuName;
   private BigDecimal price;
   private BigDecimal originalPrice;
   private String skuTitle;
   private String skuSubtitle;
   private String skuDesc;
   private List<Images> images;
-  private List<String> descar;
   private int fullCount;
   private BigDecimal discount;
   private int countStatus;

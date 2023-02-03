@@ -1,10 +1,10 @@
 package com.xunqi.gulimall.product.app;
 
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
-import com.xunqi.common.valid.AddGroup;
-import com.xunqi.common.valid.UpdateGroup;
-import com.xunqi.common.valid.UpdateStatusGroup;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
+import com.common.valid.AddGroup;
+import com.common.valid.UpdateGroup;
+import com.common.valid.UpdateStatusGroup;
 import com.xunqi.gulimall.product.entity.BrandEntity;
 import com.xunqi.gulimall.product.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.xunqi.gulimall.product.exception;
 
-import com.xunqi.common.exception.BizCodeEnum;
-import com.xunqi.common.utils.R;
+import com.common.exception.BizCodeEnum;
+import com.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

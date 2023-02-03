@@ -1,22 +1,19 @@
 package com.xunqi.gulimall.product.app;
 
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
-import com.xunqi.gulimall.product.entity.SkuInfoEntity;
-import com.xunqi.gulimall.product.service.SkuInfoService;
-import com.xunqi.gulimall.product.service.SpuInfoService;
+import com.common.es.SkuEsModel;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
+import com.xunqi.gulimall.product.entity.*;
+import com.xunqi.gulimall.product.service.*;
 import com.xunqi.gulimall.product.vo.SkuItemVo;
-import com.xunqi.gulimall.product.vo.Skus;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 
 /**
@@ -29,12 +26,20 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("product/skuinfo")
 public class SkuInfoController {
-
     @Autowired
     private SkuInfoService skuInfoService;
-
     @Autowired
     private SpuInfoService spuInfoService;
+    @Autowired
+    private SkuImagesService skuImagesService;
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
+    @Autowired
+    private AttrService attrService;
+    @Autowired
+    private BrandService brandService;
+    @Autowired
+    private CategoryService categoryService;
     /**
      * 根据skuId查询当前商品的价格
      * @param skuId
@@ -53,15 +58,42 @@ public class SkuInfoController {
     }
 
     /**
-     * TODO 回显 edit SPU stock Info
+     * TODO Back to the display edit SPU stock Info
      */
     @GetMapping("/vo/sku/saleAttr/{spuId}")
     //@RequiresPermissions("product:spuinfo:update")
     public R displaySaleAttr(@PathVariable("spuId") Long spuId){
-        //pms_sku_info   get spu_id
-//        List<Long> ids = spuInfoService.
-        List<Skus> skus = new ArrayList<>();
-        return R.ok().put("skus",skus);
+        List<SkuInfoEntity> skuInfoEntities = skuInfoService.getSkusBySpuId(spuId);
+        List<ProductAttrValueEntity> baseAttrs = productAttrValueService.baseAttrListforspu(spuId);
+        List<Long> attrIds = baseAttrs.stream().map(attr -> {
+            return attr.getAttrId();
+        }).collect(Collectors.toList());
+
+        List<Long> searchAttrIds = attrService.selectSearchAttrs(attrIds);
+        Set<Long> idSet = searchAttrIds.stream().collect(Collectors.toSet());
+
+        List<SkuEsModel.Attrs> attrsList = baseAttrs.stream().filter(item -> {
+            return idSet.contains(item.getAttrId());
+        }).map(item -> {
+            SkuEsModel.Attrs attrs = new SkuEsModel.Attrs();
+            BeanUtils.copyProperties(item, attrs);
+            return attrs;
+        }).collect(Collectors.toList());
+
+        BrandEntity brandEntity = brandService.getById(skuInfoEntities.get(0).getBrandId());
+        CategoryEntity categoryEntity = categoryService.getById(skuInfoEntities.get(0).getCatalogId());
+
+        for(SkuInfoEntity skuInfo : skuInfoEntities){
+            skuInfo.setBrandName(brandEntity.getName());
+            skuInfo.setBrandId(brandEntity.getBrandId());
+            skuInfo.setBrandImg(brandEntity.getLogo());
+            skuInfo.setCatalogId(categoryEntity.getCatId());
+            skuInfo.setCatalogName(categoryEntity.getName());
+            skuInfo.setAttrs(attrsList);
+            List<SkuImagesEntity> images = skuImagesService.getImagesBySkuId(skuInfo.getSkuId());
+            skuInfo.setImagesList(images);
+        }
+        return R.ok().put("skus",skuInfoEntities);
     }
 
 

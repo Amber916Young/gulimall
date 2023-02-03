@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xunqi.gulimall.product.entity.SpuInfoDescEntity;
 import com.xunqi.gulimall.product.service.SpuInfoDescService;
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
 
 
 

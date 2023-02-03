@@ -1,6 +1,6 @@
 package com.xunqi.gulimall.product.feign;
 
-import com.xunqi.common.utils.R;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.fallback.SeckillFeignServiceFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

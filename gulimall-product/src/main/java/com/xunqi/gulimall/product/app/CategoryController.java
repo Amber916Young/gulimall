@@ -1,6 +1,6 @@
 package com.xunqi.gulimall.product.app;
 
-import com.xunqi.common.utils.R;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.entity.CategoryEntity;
 import com.xunqi.gulimall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,5 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SkuImagesDao extends BaseMapper<SkuImagesEntity> {
-	
+
+    SkuImagesEntity selectDefaultSkuId(Long skuId);
 }

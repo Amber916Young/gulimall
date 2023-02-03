@@ -1,17 +1,14 @@
 package com.xunqi.gulimall.product.app;
 
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
-import com.xunqi.gulimall.product.entity.SkuInfoEntity;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.entity.SpuInfoEntity;
 import com.xunqi.gulimall.product.service.SpuInfoService;
-import com.xunqi.gulimall.product.vo.SkuItemVo;
 import com.xunqi.gulimall.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 

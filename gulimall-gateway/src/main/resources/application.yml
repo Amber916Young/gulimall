@@ -5,19 +5,8 @@ spring:
       transport:
         #配置sentinel dashboard地址
         dashboard: localhost:8080
-
     gateway:
       routes:
-#        - id: test_route
-#          uri: https://www.baidu.com
-#          predicates:
-#            - Query=uri,baidu
-#
-#        - id: qq_route
-#          uri: https://www.qq.com
-#          predicates:
-#            - Query=uri,qq
-
         - id: product_route
           uri: lb://gulimall-product
           predicates:
@@ -112,5 +101,5 @@ management:
         include: '*'
 
   ## 前端项目，/api
+  //http://localhost:
 ## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
-## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree

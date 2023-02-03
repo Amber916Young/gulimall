@@ -3,6 +3,8 @@ package com.xunqi.gulimall.product.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.xunqi.gulimall.product.vo.BrandVo;
+import com.xunqi.gulimall.product.vo.Catelog2Vo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,19 +13,12 @@ import java.util.Date;
 
 /**
  * spu信息
- * 
- * @author 夏沫止水
- * @email HeJieLin@gulimall.com
- * @date 2020-05-22 19:00:18
+
  */
 @Data
 @TableName("pms_spu_info")
-public class SpuInfoEntity implements Serializable {
+public class SpuInfoEntity  implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 商品id
-	 */
 	@TableId
 	private Long id;
 	/**
@@ -43,11 +38,12 @@ public class SpuInfoEntity implements Serializable {
 	 */
 	private Long brandId;
 
-	/**
-	 * 品牌名
-	 */
 	@TableField(exist = false)
 	private String brandName;
+	@TableField(exist = false)
+	private String cateName;
+	@TableField(exist = false)
+	private String defaultImage;
 
 	/**
 	 * 

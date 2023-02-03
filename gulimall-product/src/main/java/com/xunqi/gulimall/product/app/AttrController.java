@@ -1,7 +1,7 @@
 package com.xunqi.gulimall.product.app;
 
-import com.xunqi.common.utils.PageUtils;
-import com.xunqi.common.utils.R;
+import com.common.utils.PageUtils;
+import com.common.utils.R;
 import com.xunqi.gulimall.product.entity.ProductAttrValueEntity;
 import com.xunqi.gulimall.product.service.AttrService;
 import com.xunqi.gulimall.product.service.ProductAttrValueService;

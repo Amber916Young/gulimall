@@ -1,7 +1,7 @@
 package com.xunqi.gulimall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xunqi.common.utils.PageUtils;
+import com.common.utils.PageUtils;
 import com.xunqi.gulimall.product.entity.AttrEntity;
 import com.xunqi.gulimall.product.vo.AttrGroupRelationVo;
 import com.xunqi.gulimall.product.vo.AttrRespVo;

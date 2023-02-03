@@ -2,23 +2,16 @@ package com.xunqi.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xunqi.common.valid.AddGroup;
-import com.xunqi.common.valid.ListValue;
-import com.xunqi.common.valid.UpdateGroup;
-import com.xunqi.common.valid.UpdateStatusGroup;
+import com.common.valid.AddGroup;
+import com.common.valid.ListValue;
+import com.common.valid.UpdateGroup;
+import com.common.valid.UpdateStatusGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
-/**
- * 品牌
- * 
- * @author 夏沫止水
- * @email HeJieLin@gulimall.com
- * @date 2020-05-22 19:00:18
- */
 @Data
 @TableName("pms_brand")
 public class BrandEntity implements Serializable {

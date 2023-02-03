@@ -1,7 +1,7 @@
 package com.xunqi.gulimall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xunqi.common.utils.PageUtils;
+import com.common.utils.PageUtils;
 import com.xunqi.gulimall.product.entity.SkuImagesEntity;
 
 import java.util.List;
@@ -19,5 +19,7 @@ public interface SkuImagesService extends IService<SkuImagesEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     List<SkuImagesEntity> getImagesBySkuId(Long skuId);
+
+    String getByDefalutSkuId(Long skuId);
 }
 
