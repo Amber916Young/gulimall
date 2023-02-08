@@ -8,7 +8,7 @@
         <result property="id" column="id"/>
         <result property="orderSn" column="order_sn"/>
         <result property="orderId" column="order_id"/>
-        <result property="alipayTradeNo" column="alipay_trade_no"/>
+        <result property="tradeNo" column="trade_no"/>
         <result property="totalAmount" column="total_amount"/>
         <result property="subject" column="subject"/>
         <result property="paymentStatus" column="payment_status"/>
@@ -16,6 +16,7 @@
         <result property="confirmTime" column="confirm_time"/>
         <result property="callbackContent" column="callback_content"/>
         <result property="callbackTime" column="callback_time"/>
+        <result property="token" column="token"/>
     </resultMap>
 
 

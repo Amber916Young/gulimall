@@ -12,6 +12,7 @@
         <result property="spuBrand" column="spu_brand"/>
         <result property="categoryId" column="category_id"/>
         <result property="skuId" column="sku_id"/>
+        <result property="skuTitle" column="sku_title"/>
         <result property="skuPic" column="sku_pic"/>
         <result property="skuPrice" column="sku_price"/>
         <result property="skuQuantity" column="sku_quantity"/>

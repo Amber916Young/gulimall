@@ -6,18 +6,26 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.common.utils.PageUtils;
 import com.common.utils.Query;
 import com.mall.order.dao.OrderItemDao;
+import com.mall.order.entity.OrderEntity;
 import com.mall.order.entity.OrderItemEntity;
 import com.mall.order.service.OrderItemService;
 import com.mall.order.entity.OrderReturnReasonEntity;
+import com.mall.order.service.OrderService;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
 @Service("orderItemService")
 public class OrderItemServiceImpl extends ServiceImpl<OrderItemDao, OrderItemEntity> implements OrderItemService {
+
+    @Autowired
+    private OrderItemService orderItemService;
+
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -28,6 +36,7 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemDao, OrderItemEnt
 
         return new PageUtils(page);
     }
+
 
 
     /**

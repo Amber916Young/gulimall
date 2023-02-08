@@ -76,7 +76,7 @@ public class OrderItemEntity implements Serializable {
 	/**
 	 * 商品促销分解金额
 	 */
-	private BigDecimal promotionAmount;
+	private BigDecimal promotionAmount = new BigDecimal(0.0);
 
 	/**
 	 * 该商品经过优惠后的分解金额

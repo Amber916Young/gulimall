@@ -5,7 +5,7 @@ package com.mall.order.enume;
  */
 
 public enum OrderStatusEnum {
-    CREATE_NEW(0,"Payment pending"),
+    CREATE_NEW(0,"Unpaid"),
     PAYED(1,"Paid"),
     SENDED(2,"Shipped"),
     RECIEVED(3,"Completed"),

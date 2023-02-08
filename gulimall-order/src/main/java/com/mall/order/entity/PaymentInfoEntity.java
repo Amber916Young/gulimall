@@ -10,10 +10,6 @@ import lombok.Data;
 
 /**
  * 支付信息表
- * 
- * @author 夏沫止水
- * @email HeJieLin@gulimall.com
- * @date 2020-05-22 19:49:53
  */
 @Data
 @TableName("oms_payment_info")
@@ -36,7 +32,7 @@ public class PaymentInfoEntity implements Serializable {
 	/**
 	 * 支付宝交易流水号
 	 */
-	private String alipayTradeNo;
+	private String tradeNo;
 	/**
 	 * 支付总金额
 	 */
@@ -66,4 +62,5 @@ public class PaymentInfoEntity implements Serializable {
 	 */
 	private Date callbackTime;
 
+	private String token;
 }

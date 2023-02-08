@@ -19,28 +19,12 @@ public class OrderEntity implements Serializable {
 
 	@TableId
 	private Long id;
-	/**
-	 * member_id
-	 */
-	private Long memberId;
-	/**
-	 * 订单号
-	 */
 	private String orderSn;
-	/**
-	 * create_time
-	 */
 	private Date createTime;
-	/**
-	 * 订单总额
-	 */
 	private BigDecimal totalAmount;
 	private BigDecimal payAmount;
-	private BigDecimal shippingAmount;
-	/**
-	 * 后台调整订单使用的折扣金额
-	 */
-	private BigDecimal discountAmount;
+	private BigDecimal shippingAmount ;
+	private BigDecimal discountAmount ;
 	/**
 	 * 支付方式【1->bank；2->Cash on delivery；】
 	 */
@@ -68,19 +52,19 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 发票类型[0->不开发票；1->电子发票；2->纸质发票]
 	 */
-	private Integer billType;
-	private String billHeader;
-	private String billContent;
-	private String billReceiverPhone;
-	private String billReceiverEmail;
+	private Integer invoiceType;
+	private String invoiceAddressLine1;
+	private String invoiceAddressLine2;
+	private String invoiceAddressLine3;
 	private String receiverName;
 	private String receiverPhone;
 	private String receiverEmail;
 	private String receiverPostCode;
-	private String receiverCity;
+	private String receiverCounty;
 	private String receiverCountry;
 	private String addressLine1;
-	private String addressLine2; // optional
+	private String addressLine2;
+	private String addressLine3;
 	private String note;
 	/**
 	 * 确认收货状态[0->未确认；1->已确认]
@@ -114,4 +98,7 @@ public class OrderEntity implements Serializable {
 	@TableField(exist = false)
 	private List<OrderItemEntity> orderItemEntityList;
 
+
+	@TableField(exist = false)
+	private PaymentInfoEntity paymentInfo;
 }

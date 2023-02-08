@@ -1,12 +1,12 @@
 package com.mall.order.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.common.utils.PageUtils;
 import com.common.utils.R;
 import com.mall.order.entity.OrderEntity;
-import com.mall.order.entity.OrderItemEntity;
 import com.mall.order.service.OrderItemService;
 import com.mall.order.service.OrderService;
+import com.mall.order.service.PaymentInfoService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +18,6 @@ import java.util.Map;
 
 /**
  * 订单
- *
- * @author 夏沫止水
- * @email HeJieLin@gulimall.com
- * @date 2020-05-22 19:49:53
  */
 @RestController
 @RequestMapping("order/order")
@@ -73,22 +69,19 @@ public class OrderController {
     @RequestMapping("/info/{id}")
     //@RequiresPermissions("order:order:info")
     public R info(@PathVariable("id") Long id){
-		OrderEntity order = orderService.getById(id);
-        List<OrderItemEntity> orderItemEntities = orderItemService.list(new QueryWrapper<OrderItemEntity>()
-                .eq("order_sn", order.getOrderSn()));
-        order.setOrderItemEntityList(orderItemEntities);
+        OrderEntity order = orderService.getDetailById(id);
         return R.ok().put("order", order);
     }
 
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @RequestMapping("/create")
+    @SneakyThrows
     //@RequiresPermissions("order:order:save")
     public R save(@RequestBody OrderEntity order){
-		orderService.save(order);
-
-        return R.ok();
+         order = orderService.create(order);
+        return R.ok().put("order",order);
     }
 
     /**

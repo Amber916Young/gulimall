@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Primary;
  * @createTime: 2020-07-01 17:41
  **/
 
-@Configuration
+//@Configuration
 public class MyRabbitConfig {
 
     private RabbitTemplate rabbitTemplate;

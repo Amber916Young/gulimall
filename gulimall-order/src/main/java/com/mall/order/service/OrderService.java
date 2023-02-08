@@ -6,6 +6,7 @@ import com.common.utils.PageUtils;
 import com.mall.order.entity.OrderEntity;
 import com.mall.order.vo.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -79,5 +80,9 @@ public interface OrderService extends IService<OrderEntity> {
      * @param orderTo
      */
     void createSeckillOrder(SeckillOrderTo orderTo);
+
+    OrderEntity create( OrderEntity order) throws UnsupportedEncodingException;
+
+    OrderEntity getDetailById(Long id);
 }
 

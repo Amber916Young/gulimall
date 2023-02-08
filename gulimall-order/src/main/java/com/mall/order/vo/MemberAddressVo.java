@@ -21,7 +21,7 @@ public class MemberAddressVo {
     private String phone;
     private String email;
     private String postCode;
-    private String country;
+    private String county;
     private String city;
     private String addressLine1;
     private String addressLine2;

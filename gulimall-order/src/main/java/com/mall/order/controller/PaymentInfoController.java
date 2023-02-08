@@ -20,9 +20,6 @@ import com.common.utils.R;
 /**
  * 支付信息表
  *
- * @author 夏沫止水
- * @email HeJieLin@gulimall.com
- * @date 2020-05-22 19:49:53
  */
 @RestController
 @RequestMapping("order/paymentinfo")

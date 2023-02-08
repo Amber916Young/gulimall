@@ -6,7 +6,6 @@
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.mall.order.entity.OrderEntity" id="orderMap">
         <result property="id" column="id"/>
-        <result property="memberId" column="member_id"/>
         <result property="orderSn" column="order_sn"/>
         <result property="createTime" column="create_time"/>
         <result property="totalAmount" column="total_amount"/>
@@ -19,19 +18,19 @@
         <result property="deliveryCompany" column="delivery_company"/>
         <result property="deliverySn" column="delivery_sn"/>
         <result property="autoConfirmDay" column="auto_confirm_day"/>
-        <result property="billType" column="bill_type"/>
-        <result property="billHeader" column="bill_header"/>
-        <result property="billContent" column="bill_content"/>
-        <result property="billReceiverPhone" column="bill_receiver_phone"/>
-        <result property="billReceiverEmail" column="bill_receiver_email"/>
+        <result property="invoiceType" column="invoice_type"/>
+        <result property="invoiceAddressLine1" column="invoice_address_line1"/>
+        <result property="invoiceAddressLine2" column="invoice_address_line2"/>
+        <result property="invoiceAddressLine3" column="invoice_address_line3"/>
         <result property="receiverName" column="receiver_name"/>
         <result property="receiverPhone" column="receiver_phone"/>
         <result property="receiverEmail" column="receiver_email"/>
         <result property="receiverPostCode" column="receiver_post_code"/>
+        <result property="receiverCounty" column="receiver_county"/>
         <result property="receiverCountry" column="receiver_country"/>
-        <result property="receiverCity" column="receiver_city"/>
         <result property="addressLine1" column="address_line1"/>
         <result property="addressLine2" column="address_line2"/>
+        <result property="addressLine3" column="address_line3"/>
         <result property="note" column="note"/>
         <result property="confirmStatus" column="confirm_status"/>
         <result property="deleteStatus" column="delete_status"/>

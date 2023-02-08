@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @createTime: 2020-07-06 18:39
  **/
 
-@Configuration
+//@Configuration
 public class MyRabbitMQConfig {
 
     /* 容器中的Queue、Exchange、Binding 会自动创建（在RabbitMQ）不存在的情况下 */
